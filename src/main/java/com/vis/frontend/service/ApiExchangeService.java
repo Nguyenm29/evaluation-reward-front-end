@@ -40,6 +40,13 @@ public class ApiExchangeService {
         return response;
     }
 
+    public <T> ResponseEntity<T> getForEntity(HttpServletRequest httpRequest, String url, Object request, Class<T> classType) {
+        HttpEntity<Object> requestEntity = createEntity(request);
+        logger.info("URL API Exchange: " + url);
+        ResponseEntity<T> response = (ResponseEntity<T>) restTemplate.postForEntity(url, requestEntity, classType);
+        return response;
+    }
+
     private HttpEntity<Object> createFileEntity(HttpServletRequest httpRequest, Object data) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", data);
@@ -94,6 +101,7 @@ public class ApiExchangeService {
         ResponseEntity<T> response = (ResponseEntity<T>) restTemplate.exchange( url, HttpMethod.GET, requestEntity , String.class);
         return response;
     }
+
 
     public <T> ResponseEntity<T> get(HttpServletRequest httpRequest, String url, Class<T> classType, MediaType mediaType) {
         HttpEntity<?> requestEntity = createEntity(httpRequest, null, mediaType, null);

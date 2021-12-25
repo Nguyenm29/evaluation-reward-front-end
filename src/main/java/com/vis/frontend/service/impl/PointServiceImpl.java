@@ -4,6 +4,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.vis.frontend.model.TimeKeeping;
 import com.vis.frontend.model.response.RewardPointResponse;
+import com.vis.frontend.model.response.UserResponse;
 import com.vis.frontend.service.AbstractService;
 import com.vis.frontend.service.ApiExchangeService;
 import com.vis.frontend.service.PointService;
@@ -63,6 +64,16 @@ public class PointServiceImpl extends AbstractService implements PointService {
         body.add("employeeId", employeeId);
         ResponseEntity<Float> response = (ResponseEntity<Float>) apiExchangeService.get(request, url, Float.class, MediaType.APPLICATION_JSON, body);
         return Float.valueOf(String.valueOf(response.getBody()));
+    }
+
+    @Override
+    public boolean exchangePoint(HttpServletRequest httpServletRequest, String cost, String serviceId) {
+
+        UserResponse userResponse = (UserResponse) httpServletRequest.getSession().getAttribute("user");
+        String url = apiExchangeService.createURL(backApi + "/point/exchange" +
+                "?cost="+ cost + "&employeeId=" + userResponse.getEmployeeId() + "&serviceId="+serviceId);
+        ResponseEntity<Boolean> response = apiExchangeService.get(httpRequest,url, boolean.class, MediaType.APPLICATION_JSON);
+        return String.valueOf(response.getBody()).equals("true");
     }
 
 }

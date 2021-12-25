@@ -30,10 +30,11 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+
+    <![endif]-->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <!-- HEADER -->
@@ -157,8 +158,8 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Đổi điểm</a></li>
-                <li><a href="#">Xem đánh giá</a></li>
+                <li class="active"><a th:href="@{/home}">Đổi điểm</a></li>
+                <li><a th:href="@{/evaluation}">Xem đánh giá</a></li>
                 <li><a href="#">Lịch sử</a></li>
                 <li><a href="#">Cá nhân</a></li>
                 <li><a href="#">Tin nhắn</a></li>
@@ -215,9 +216,10 @@
                                         <h4 class="product-price">99P</h4>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button value="99" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Quy đổi</button>
+                                        <button value="cost=99&serviceId=1" name="1" class="add-to-cart-btn">Quy đổi</button>
                                     </div>
                                 </div>
+
                                 <!-- /product -->
                                 <!-- product -->
                                 <div class="product">
@@ -233,7 +235,7 @@
                                         <h4 class="product-price">99 P</h4>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn">Quy đổi</button>
+                                        <button value="cost=99&serviceId=2" class="add-to-cart-btn">Quy đổi</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -251,7 +253,7 @@
                                         <h4 class="product-price">499P</h4>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Quy đổi</button>
+                                        <button value="cost=499&serviceId=3" class="add-to-cart-btn">Quy đổi</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -271,7 +273,7 @@
                                         <h4 class="product-price">15 P</h4>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn">Quy đổi</button>
+                                        <button value="cost=15&serviceId=4" class="add-to-cart-btn">Quy đổi</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -287,7 +289,7 @@
                                         <h4 class="product-price">15 P</h4>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn">Quy đổi</button>
+                                        <button value="cost=15&serviceId=5" name="5" class="add-to-cart-btn">Quy đổi</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -304,7 +306,7 @@
                                         <h4 class="product-price">15P</h4>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Quy đổi</button>
+                                        <button value="cost=15&serviceId=6" name="6" class="add-to-cart-btn">Quy đổi</button>
                                     </div>
                                 </div>
                             </div>
@@ -442,6 +444,26 @@
 <script th:src="@{js/employee/home/nouislider.min.js}"></script>
 <script th:src="@{js/employee/home/jquery.zoom.min.js}"></script>
 <script th:src="@{js/employee/home/main.js}"></script>
+<script th:inline="javascript">
+    var isExchangeSuccess = /*[[${isExchangeSuccess}]]*/ null;
+    if (isExchangeSuccess) {
+        var cost = /*[[${cost}]]*/ null;
+        var message = "Với mức giá dịch vụ là: " + cost + "P";
+        swal({
+            title: "Đổi điểm thành công!",
+            text: message,
+            icon: "success",
+            button: "OK!",
+        });
+    }
+</script>
+<script>
+    $( ".add-to-cart-btn" ).click(function() {
+        var value = $(this).val();
+        url = "http://localhost:8080/point/exchange?" + value;
+        window.open(url, "_self");
+    });
+</script>
 
 </body>
 </html>

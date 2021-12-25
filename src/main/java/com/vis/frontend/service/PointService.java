@@ -15,4 +15,6 @@ public interface PointService {
 
     public float getPointReward(HttpServletRequest httpServletRequest, Long employeeId);
 
+    public boolean exchangePoint(HttpServletRequest httpServletRequest, String employeeId, String serviceId);
+
 }
