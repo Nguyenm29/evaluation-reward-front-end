@@ -6,5 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface EvaluationService {
-    List<EvaluationResponse> getListEvaluation(HttpServletRequest httpServletRequest, String employeeId);
+    List<EvaluationResponse> getListEvaluation(HttpServletRequest httpServletRequest);
+
+    float totalPoint(List<EvaluationResponse> list);
+
 }

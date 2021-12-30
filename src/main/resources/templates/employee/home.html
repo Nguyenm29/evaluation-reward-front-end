@@ -456,6 +456,16 @@
             button: "OK!",
         });
     }
+    if (isExchangeSuccess === false) {
+        var cost = /*[[${cost}]]*/ null;
+        var message = "Bạn không đủ: " + cost + "P";
+        swal({
+            title: "Đổi điểm thất bại!",
+            text: message,
+            icon: "warning",
+            button: "Fail!",
+        });
+    }
 </script>
 <script>
     $( ".add-to-cart-btn" ).click(function() {

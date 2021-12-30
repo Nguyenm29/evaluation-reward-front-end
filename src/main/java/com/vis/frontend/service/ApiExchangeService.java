@@ -43,7 +43,7 @@ public class ApiExchangeService {
     public <T> ResponseEntity<T> getForEntity(HttpServletRequest httpRequest, String url, Object request, Class<T> classType) {
         HttpEntity<Object> requestEntity = createEntity(request);
         logger.info("URL API Exchange: " + url);
-        ResponseEntity<T> response = (ResponseEntity<T>) restTemplate.postForEntity(url, requestEntity, classType);
+        ResponseEntity<T> response = (ResponseEntity<T>) restTemplate.getForEntity(url, classType, requestEntity);
         return response;
     }
 

@@ -1,5 +1,6 @@
 package com.vis.frontend.service;
 
+import com.vis.frontend.model.response.EvaluationResponse;
 import com.vis.frontend.model.response.RewardPointResponse;
 import org.springframework.web.multipart.MultipartFile;
 

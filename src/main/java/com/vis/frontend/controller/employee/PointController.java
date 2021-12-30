@@ -23,7 +23,7 @@ public class PointController extends AbstractController<PointService> {
         UserResponse userResponse = (UserResponse) httpSession.getAttribute("user");
         float point = service.getPointReward(httpServletRequest, userResponse.getEmployeeId());
         model.addAttribute("rewardPoint", point);
-        if (StringUtils.isNoneEmpty(isExchangeSuccess)) {
+        if (StringUtils.isNoneEmpty(isExchangeSuccess) && httpServletRequest.getHeader("Referer").contains("point")) {
             model.addAttribute("isExchangeSuccess", Boolean.valueOf(isExchangeSuccess));
             model.addAttribute("cost", cost);
         }
@@ -31,7 +31,8 @@ public class PointController extends AbstractController<PointService> {
     }
 
     @GetMapping("/point/view")
-    public String viewPoint() {
+    public String viewPoint(Model model,
+                            HttpServletRequest httpServletRequest) {
         return "employee/viewpoint";
     }
 

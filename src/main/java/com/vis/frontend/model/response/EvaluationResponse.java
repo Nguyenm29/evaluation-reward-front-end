@@ -11,7 +11,7 @@ public class EvaluationResponse {
     private float dayWork;
     private float dayOff;
     private float lateTime;
-    private int month;
+    private String month;
     private float overTime;
     private float totalPoint;
 }

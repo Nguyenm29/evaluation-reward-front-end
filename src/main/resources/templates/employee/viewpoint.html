@@ -493,46 +493,25 @@
                             <tr>
                                 <td>Số ngày làm</td>
                                 <td>Số lần đi muộn</td>
-                                <td>Số lần giờ tăng ca</td>
-                                <td>Tổng điểm</td>
-                                <td>Ngày</td>
+                                <td>Số giờ tăng ca</td>
+                                <td>Điểm</td>
+                                <td>Tháng</td>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>28</td>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>330</td>
-                                <td>2021-29-07</td>
+                            <tr th:each="item,state  : ${listEvaluation}">
+                                <td th:utext="*{item.dayWork}"></td>
+                                <td th:utext="*{item.lateTime}"></td>
+                                <td th:utext="*{item.overTime}"></td>
+                                <td th:utext="*{item.totalPoint}"></td>
+                                <td th:utext="*{item.month}"></td>
                             </tr>
                             <tr>
-                                <td>28</td>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>330</td>
-                                <td>2021-29-08</td>
-                            </tr>
-                            <tr>
-                                <td>28</td>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>330</td>
-                                <td>2021-29-09</td>
-                            </tr>
-                            <tr>
-                                <td>28</td>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>330</td>
-                                <td>2021-29-10</td>
-                            </tr>
-                            <tr>
-                                <td>28</td>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>330</td>
-                                <td>2021-29-11</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="font-weight: bold;" th:utext="${total}"></td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
